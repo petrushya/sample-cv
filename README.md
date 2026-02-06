@@ -1,2 +1,2 @@
 # sample-cv
-started using react-vite 
+started using react-vite
