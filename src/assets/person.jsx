@@ -22,7 +22,7 @@ export default function Person({ data, setData }) {
   data.person && console.log(data);
   return (
     <>
-      <form onSabmit={handleSavePerson}>
+      <form onSubmit={handleSavePerson}>
         <h2>Person details</h2>
         <label>
           First name:

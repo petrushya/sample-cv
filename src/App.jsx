@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <>
-      {!data.Nickname
+      {!data.nickname
       ? <Nickname data={data} setData={setData} />
       : <Fragment>
         <h2>Welcome &ldquo;{data.nickname}&rdquo;</h2>
