@@ -40,3 +40,43 @@
 .read-the-docs {
   color: #888;
 }
+
+/* added styles */
+
+hr {
+  width: 100%;
+  border-color: color-mix(in oklch, graytext 16%, field);
+}
+
+input {
+  margin: 0 1ch;
+  font-size: 1em;
+}
+
+input:required:invalid + span::before,
+input:required:valid + span::before {
+  position: absolute;
+  font-size: 1.075rem;
+  font-weight: bold;
+}
+
+input:required:invalid + span::before {
+  content: "!";
+  color: activetext;
+}
+
+input:required:valid + span::before {
+  content: "\2714";
+  color: color-mix(in oklch, mark 64%, linktext);
+}
+
+button {
+  font-variant: all-small-caps;
+  font-weight: bold;
+  font-size: 1.125em;
+}
+
+.top-margin {
+  margin-top: 2vh;
+}
+

@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import Nickname from './assets/nickname'
 import './App.css'
 
 export default function App() {
 
+  const [data, setData] = useState({});
+
   return (
     <>
-      <h1>Welcome React-vite</h1>
+      <Nickname data={data} setData={setData} />
     </>
   )
 }
