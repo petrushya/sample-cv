@@ -44,8 +44,8 @@
 /* added styles */
 
 form {
-  border: medium solid buttonface;
-  border-radius: 5px;
+  border: thick solid buttonface;
+  border-radius: 10px;
   padding: 2vh 3ch;
   max-width: 60ch;
   & h2 {
@@ -92,6 +92,14 @@ input:required:valid + span::before {
   align-items: flex-end;
   justify-content: center;
   gap: 1vh;
+}
+
+.none-line-gap {
+  column-gap: 0;
+}
+
+.elem-block {
+  display: block;
 }
 
 .elem-start {

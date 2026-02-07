@@ -70,20 +70,24 @@ export default function Person({ data, setData }) {
           />
           <span></span>
         </label>
-        <label>
+        <label className="element-flex none-line-gap">
           Phone number:
-          <input
-            type="tel"
-            key={data.nickname + "-tel"}
-            id={data.nickname + "-tel"}
-            name="tel"
-            placeholder="123-456-78-90"
-            autoComplete="off"
-            value={tel}
-            onChange={(e) => setTel(e.target.value)}
-            required
-          />
-          <span></span>
+          <div>
+            <small className="elem-block">Format: 123-456-7890</small>
+            <input
+              type="tel"
+              key={data.nickname + "-tel"}
+              id={data.nickname + "-tel"}
+              name="tel"
+              placeholder="123-456-7890"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              autoComplete="off"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              required
+            />
+            <span></span>
+          </div>
         </label>
         <button
           key={data.nickname + "btnPerson"}
