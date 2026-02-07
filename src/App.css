@@ -43,6 +43,19 @@
 
 /* added styles */
 
+form {
+  border: medium solid buttonface;
+  border-radius: 5px;
+  padding: 2vh 3ch;
+  max-width: 60ch;
+  & h2 {
+    margin: 0 0 1vh 0;
+  }
+  & h4 {
+    margin: 0.5vh 0 0 0;
+  }
+}
+
 hr {
   width: 100%;
   border-color: color-mix(in oklch, graytext 16%, field);
@@ -70,13 +83,34 @@ input:required:valid + span::before {
   color: color-mix(in oklch, mark 64%, linktext);
 }
 
-button {
-  font-variant: all-small-caps;
-  font-weight: bold;
-  font-size: 1.125em;
-}
-
 .top-margin {
   margin-top: 2vh;
 }
 
+.element-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1vh;
+}
+
+.elem-start {
+  align-items: start;
+}
+
+.dir-column {
+  flex-direction: column;
+}
+
+.just-around {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.self-center {
+  align-self: center;
+}
+
+.self-start {
+  align-self: flex-start;
+}
