@@ -22,8 +22,11 @@ export default function Person({ data, setData }) {
   data.person && console.log(data);
   return (
     <>
-      <form onSubmit={handleSavePerson}>
-        <h2>Person details</h2>
+      <form
+        className="element-flex dir-column top-margin"
+        onSubmit={handleSavePerson}
+      >
+        <h2 className="self-start">Person details</h2>
         <label>
           First name:
           <input
@@ -85,6 +88,7 @@ export default function Person({ data, setData }) {
         <button
           key={data.nickname + "btnPerson"}
           id={data.nickname + "btnPerson"}
+          className="self-center top-margin"
         >
           confirm
         </button>
