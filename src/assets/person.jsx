@@ -1,10 +1,15 @@
 import { useState } from "react";
 
 export default function Person({ data, setData }) {
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState("");
+  const firstSet = data.person ? data.person.firstName : "";
+  const lastSet = data.person ? data.person.lastName : "";
+  const emailSet = data.person ? data.person.email : "";
+  const telSet = data.person ? data.person.tel : "";
+
+  const [first, setFirst] = useState(firstSet);
+  const [last, setLast] = useState(lastSet);
+  const [email, setEmail] = useState(emailSet);
+  const [tel, setTel] = useState(telSet);
 
   function handleSavePerson(e) {
     e.preventDefault();
@@ -20,7 +25,13 @@ export default function Person({ data, setData }) {
   }
 
   const lockButton = (function () {
-    if (data.person) {
+    if (
+      data.person &&
+      data.person.firstName === first &&
+      data.person.lastName === last &&
+      data.person.email === email &&
+      data.person.tel === tel
+    ) {
       return true;
     } else {
       return false;

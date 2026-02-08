@@ -1,11 +1,17 @@
 import { useState } from "react";
 
 export default function Experience({ data, setData }) {
-  const [company, setCompany] = useState("");
-  const [position, setPosition] = useState("");
-  const [duty, setDuty] = useState("");
-  const [startWork, setStartWork] = useState("");
-  const [endWork, setEndWork] = useState("");
+  const companySet = data.experience ? data.experience.company : "";
+  const positionSet = data.experience ? data.experience.position : "";
+  const dutySet = data.experience ? data.experience.duty : "";
+  const startWorkSet = data.experience ? data.experience.startWork : "";
+  const endWorkSet = data.experience ? data.experience.endWork : "";
+
+  const [company, setCompany] = useState(companySet);
+  const [position, setPosition] = useState(positionSet);
+  const [duty, setDuty] = useState(dutySet);
+  const [startWork, setStartWork] = useState(startWorkSet);
+  const [endWork, setEndWork] = useState(endWorkSet);
 
   function handleSaveExperience(e) {
     e.preventDefault();
@@ -21,7 +27,14 @@ export default function Experience({ data, setData }) {
     });
   }
   const lockButton = (function () {
-    if (data.experience) {
+    if (
+      data.experience &&
+      data.experience.company === company &&
+      data.experience.position === position &&
+      data.experience.duty === duty &&
+      data.experience.startWork === startWork &&
+      data.experience.endWork === endWork
+    ) {
       return true;
     } else {
       return false;

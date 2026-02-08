@@ -1,11 +1,17 @@
 import { useState } from "react";
 
 export default function Education({ data, setData }) {
-  const [scool, setScool] = useState("");
-  const [title, setTitle] = useState("");
-  const [scills, setScills] = useState("");
-  const [startEduc, setStartEduc] = useState("");
-  const [endEduc, setEndEduc] = useState("");
+  const scoolSet = data.education ? data.education.scool : "";
+  const titleSet = data.education ? data.education.title : "";
+  const scillsSet = data.education ? data.education.scills : "";
+  const startEducSet = data.education ? data.education.startEduc : "";
+  const endEducSet = data.education ? data.education.endEduc : "";
+
+  const [scool, setScool] = useState(scoolSet);
+  const [title, setTitle] = useState(titleSet);
+  const [scills, setScills] = useState(scillsSet);
+  const [startEduc, setStartEduc] = useState(startEducSet);
+  const [endEduc, setEndEduc] = useState(endEducSet);
 
   function handleSaveEduc(e) {
     e.preventDefault();
@@ -22,7 +28,14 @@ export default function Education({ data, setData }) {
   }
 
   const lockButton = (function () {
-    if (data.education) {
+    if (
+      data.education &&
+      data.education.scool === scool &&
+      data.education.title === title &&
+      data.education.scills === scills &&
+      data.education.startEduc === startEduc &&
+      data.education.endEduc === endEduc
+    ) {
       return true;
     } else {
       return false;
