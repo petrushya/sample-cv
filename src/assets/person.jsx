@@ -27,7 +27,6 @@ export default function Person({ data, setData }) {
     }
   })();
 
-  data.person && console.log(data);
   return (
     <>
       <form

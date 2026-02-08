@@ -2,11 +2,13 @@ import { useState, Fragment } from "react";
 import Nickname from "./assets/nickname";
 import Person from "./assets/person";
 import Education from "./assets/education";
+import Experience from "./assets/exrerience";
 import "./App.css";
+
 
 export default function App() {
   const [data, setData] = useState({});
-
+{data.nickname && console.log(data)}
   return (
     <>
       {!data.nickname ? (
@@ -17,6 +19,7 @@ export default function App() {
           <p>Please fill out the following form.</p>
           <Person data={data} setData={setData} />
           <Education data={data} setData={setData} />
+          <Experience data={data} setData={setData} />
         </Fragment>
       )}
     </>
