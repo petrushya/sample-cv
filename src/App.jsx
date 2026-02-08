@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import Nickname from "./assets/nickname";
 import Person from "./assets/person";
 import Education from "./assets/education";
-import Experience from "./assets/exrerience";
+import Experience from "./assets/experience";
 import "./App.css";
 
 
