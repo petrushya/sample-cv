@@ -1,6 +1,7 @@
 import { useState, Fragment } from "react";
 import Nickname from "./assets/nickname";
 import Person from "./assets/person";
+import Education from "./assets/education";
 import "./App.css";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <h2>Welcome &ldquo;{data.nickname}&rdquo;</h2>
           <p>Please fill out the following form.</p>
           <Person data={data} setData={setData} />
+          <Education data={data} setData={setData} />
         </Fragment>
       )}
     </>

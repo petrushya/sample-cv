@@ -46,19 +46,24 @@
 form {
   border: thick solid buttonface;
   border-radius: 10px;
-  padding: 2vh 3ch;
+  padding: 1lh 3ch;
   max-width: 60ch;
   & h2 {
-    margin: 0 0 1vh 0;
+    margin: 0 0 0.5lh 0;
   }
   & h4 {
-    margin: 0.5vh 0 0 0;
+    margin: 0.25lh 0 0 0;
+    text-decoration: underline;
   }
 }
 
 hr {
   width: 100%;
   border-color: color-mix(in oklch, graytext 16%, field);
+}
+
+label {
+  margin-bottom: 0.35lh;
 }
 
 input {
@@ -84,18 +89,17 @@ input:required:valid + span::before {
 }
 
 .top-margin {
-  margin-top: 2vh;
+  margin-top: 0.35lh;
 }
 
 .element-flex {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 1vh;
 }
 
-.none-line-gap {
-  column-gap: 0;
+.element-center {
+  align-items: center;
 }
 
 .elem-block {
@@ -121,4 +125,5 @@ input:required:valid + span::before {
 
 .self-start {
   align-self: flex-start;
+  margin-left: 0;
 }

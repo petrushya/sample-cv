@@ -19,6 +19,14 @@ export default function Person({ data, setData }) {
     });
   }
 
+  const lockButton = (function () {
+    if (data.person) {
+      return true;
+    } else {
+      return false;
+    }
+  })();
+
   data.person && console.log(data);
   return (
     <>
@@ -70,7 +78,7 @@ export default function Person({ data, setData }) {
           />
           <span></span>
         </label>
-        <label className="element-flex none-line-gap">
+        <label className="element-flex">
           Phone number:
           <div>
             <small className="elem-block">Format: 123-456-7890</small>
@@ -93,6 +101,7 @@ export default function Person({ data, setData }) {
           key={data.nickname + "btnPerson"}
           id={data.nickname + "btnPerson"}
           className="self-center top-margin"
+          disabled={lockButton}
         >
           confirm
         </button>
