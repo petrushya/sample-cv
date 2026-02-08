@@ -2,7 +2,7 @@ export default function Page({ data }) {
 
   return (
     <section className="max-width-80">
-      <h2>Sample page for &ldquo;{data.nickname}&rdqou;</h2>
+      <h2>Sample page for &ldquo;{data.nickname}&rdquo;</h2>
       <hr />
       <dl>
         <h2>{data.person.firstName + ' ' +
