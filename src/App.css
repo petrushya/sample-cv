@@ -127,3 +127,24 @@ input:required:valid + span::before {
   align-self: flex-start;
   margin-left: 0;
 }
+
+dl {
+  text-align: left;
+}
+
+dl dt {
+  padding-top: 0.5lh;
+  border-top: medium solid buttonface;
+}
+
+dt h3 {
+  margin-top: 1lh;
+}
+
+dd {
+  margin-bottom: 1lh;
+}
+
+.max-width-80 {
+  max-width: 80ch;
+}
