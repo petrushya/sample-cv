@@ -3,7 +3,7 @@ import Nickname from "./assets/nickname";
 import Person from "./assets/person";
 import Education from "./assets/education";
 import Experience from "./assets/experience";
-import Page from "./assets/page";
+import Page from "./assets/sample";
 import "./App.css";
 
 export default function App() {
@@ -31,7 +31,7 @@ export default function App() {
           <Experience data={data} setData={setData} />
         </Fragment>
       ) : (
-        <Page data={data} />
+        <Sample data={data} />
       )}
       <hr />
       {data.nickname && (
