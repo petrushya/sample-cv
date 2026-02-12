@@ -36,7 +36,9 @@ export default function App() {
           <p>Please fill out the following form.</p>
           <hr />
           <Person data={data} setData={setData} />
+          <hr className="hr" />
           <Education data={data} setData={setData} />
+          <hr className="hr" />
           <Experience data={data} setData={setData} />
         </Fragment>
       ) : (

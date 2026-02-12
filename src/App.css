@@ -44,8 +44,6 @@
 /* added styles */
 
 form {
-  border: thick solid buttonface;
-  border-radius: 10px;
   padding: 1lh 3ch;
   max-width: 60ch;
   & h2 {
@@ -55,6 +53,10 @@ form {
     margin: 0.25lh 0 0 0;
     text-decoration: underline;
   }
+}
+
+.hr {
+  border: medium solid buttonface; 
 }
 
 hr {
