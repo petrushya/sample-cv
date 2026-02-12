@@ -40,7 +40,7 @@ export default function App() {
           <Experience data={data} setData={setData} />
         </Fragment>
       ) : (
-        <Sample data={data} />
+        <Page data={data} />
       )}
       <hr />
       <button
