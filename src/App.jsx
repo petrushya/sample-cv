@@ -26,6 +26,7 @@ export default function App() {
       endStudy: "",
       company: "",
       position: "",
+      duties: "",
       startWork: "",
       endWork: ""
     };
