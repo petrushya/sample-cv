@@ -1,21 +1,21 @@
-export default function Experience({ idData, data, setData }) {
+import { useState } from 'react'
+
+export default function Experience({ data, setData }) {
+
+const [newData, setNewData] = useState(data);
 
   function handleExperience(e) {
     e.preventDefault();
-    idData.company = data.company;
-    idData.position = data.position;
-    idData.duties = data.duties;
-    idData.startWork = data.startWork;
-    idData.endWork = data.endStudy
+    setNewData(data);
   }
 
   const lockButton = (function () {
     if (
-      data.company === idData.company &&
-      data.position === idData.position &&
-      data.duties === idData.duties &&
-      data.startWork === idData.startWork &&
-      data.endWork === idData.endWork
+      data.company === newData.company &&
+      data.position === newData.position &&
+      data.duties === newData.duties &&
+      data.startWork === newData.startWork &&
+      data.endWork === newData.endWork
     ) {
       return true;
     } else {
