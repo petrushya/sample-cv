@@ -1,40 +1,21 @@
-import { useState } from "react";
+export default function Education({ idData, data, setData }) {
 
-export default function Education({ data, setData }) {
-  const scoolSet = data.education ? data.education.scool : "";
-  const titleSet = data.education ? data.education.title : "";
-  const scillsSet = data.education ? data.education.scills : "";
-  const startEducSet = data.education ? data.education.startEduc : "";
-  const endEducSet = data.education ? data.education.endEduc : "";
-
-  const [scool, setScool] = useState(scoolSet);
-  const [title, setTitle] = useState(titleSet);
-  const [scills, setScills] = useState(scillsSet);
-  const [startEduc, setStartEduc] = useState(startEducSet);
-  const [endEduc, setEndEduc] = useState(endEducSet);
-
-  function handleSaveEduc(e) {
+  function handleEducation(e) {
     e.preventDefault();
-    setData({
-      ...data,
-      education: {
-        scool: scool,
-        title: title,
-        scills: scills,
-        startEduc: startEduc,
-        endEduc: endEduc,
-      },
-    });
+    idData.scool = data.scool;
+    idData.title = data.title;
+    idData.scills = data.scills;
+    idData.startStudy = data.startStudy;
+    idData.endStudy = data.endStudy
   }
 
   const lockButton = (function () {
     if (
-      data.education &&
-      data.education.scool === scool &&
-      data.education.title === title &&
-      data.education.scills === scills &&
-      data.education.startEduc === startEduc &&
-      data.education.endEduc === endEduc
+      data.scool === idData.scool &&
+      data.title === idData.title &&
+      data.scills === idData.scills &&
+      data.startStudy === idData.startStudy &&
+      data.endStudy === idData.endStudy
     ) {
       return true;
     } else {
@@ -42,24 +23,23 @@ export default function Education({ data, setData }) {
     }
   })();
 
-  console.log(data);
   return (
     <>
       <form
-        onSubmit={handleSaveEduc}
+        onSubmit={handleEducation}
         className="element-flex dir-column top-margin"
       >
         <h2 className="self-start">Educational status</h2>
         <label>
           Scool name:
           <input
-            key={data.nickname + "-scool"}
-            id={data.nickname + "-scool"}
+            key={data.id + "scool"}
+            id={data.id + "scool"}
             name="name of the institution"
             placeholder="scool"
             autoComplete="off"
-            value={scool}
-            onChange={(e) => setScool(e.target.value)}
+            value={data.scool}
+            onChange={(e) => setData({...data, scool: e.target.value})}
             required
           />
           <span></span>
@@ -67,13 +47,13 @@ export default function Education({ data, setData }) {
         <label>
           Title of study:
           <input
-            key={data.nickname + "-title"}
-            id={data.nickname + "-title"}
+            key={data.id + "title"}
+            id={data.id + "title"}
             name="title of study"
             placeholder="study"
             autoComplete="off"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={data.title}
+            onChange={(e) => setData({...data, title: e.target.value})}
             required
           />
           <span></span>
@@ -81,18 +61,17 @@ export default function Education({ data, setData }) {
         <label>
           Programming skills:
           <input
-            key={data.nickname + "-scills"}
-            id={data.nickname + "-scills"}
+            key={data.id + "scills"}
+            id={data.id + "-scills"}
             name="programming skills"
             placeholder="skills"
             autoComplete="off"
-            value={scills}
-            onChange={(e) => setScills(e.target.value)}
+            value={data.scills}
+            onChange={(e) => setData({...data, scills: e.target.value})}
             required
           />
           <span></span>
         </label>
-        <h4 className="self-start">Date of study:</h4>
         <div className="element-flex just-around">
           <label className="element-flex dir-column elem-start">
             Start training:
@@ -100,12 +79,12 @@ export default function Education({ data, setData }) {
               <input
                 className="self-start"
                 type="date"
-                key={data.nickname + "-sartEduc"}
-                id={data.nickname + "-startEduc"}
+                key={data.id + "sartEduc"}
+                id={data.id + "startEduc"}
                 name="beginning of training"
                 autoComplete="off"
-                value={startEduc}
-                onChange={(e) => setStartEduc(e.target.value)}
+                value={data.startStudy}
+                onChange={(e) => setData({...data, startStudy: e.target.value})}
                 required
               />
               <span></span>
@@ -117,20 +96,20 @@ export default function Education({ data, setData }) {
               <input
                 className="self-start"
                 type="date"
-                key={data.nickname + "-endEduc"}
-                id={data.nickname + "-endEduc"}
+                key={data.id + "endStudy"}
+                id={data.id + "endStudy"}
                 name="end of traning"
                 autoComplete="off"
-                value={endEduc}
-                onChange={(e) => setEndEduc(e.target.value)}
+                value={data.endStudy}
+                onChange={(e) => setData({...data, endStudy: e.target.value})}
               />
               <span></span>
             </div>
           </label>
         </div>
         <button
-          key={data.nickname + "-btnEduc"}
-          id={data.nickname + "-btnEduc"}
+          key={data.id + "btnStudy"}
+          id={data.id + "btnStudy"}
           disabled={lockButton}
           className="self-center top-margin"
         >
