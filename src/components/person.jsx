@@ -1,19 +1,21 @@
-export default function Person({ idData, data, setData }) {
+import { useState } from 'react'
+
+export default function Person({ data, setData }) {
+
+  const [newData, setNewData] = useState(data);
 
   function handlePerson(e) {
     e.preventDefault();
-    idData.name = data.name;
-    idData.surname = data.surname;
-    idData.email = data.email;
-    idData.tel = data.tel;
+    setData({...data, id: data.name + data.surname});
+    setNewData(data);
   }
 
   const lockButton = (function () {
     if (
-      data.name === idData.name &&
-      data.surname === idData.surname &&
-      data.email === idData.email &&
-      data.tel === idData.tel
+      data.name === newData.name &&
+      data.surname === newData.surname &&
+      data.email === newData.email &&
+      data.tel === newData.tel
     ) {
       return true;
     } else {
