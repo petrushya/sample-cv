@@ -4,6 +4,8 @@ export default function Person({ idData, data, setData }) {
     e.preventDefault();
     idData.name = data.name;
     idData.surname = data.surname;
+    idData.email = data.email;
+    idData.tel = data.tel;
   }
 
   const lockButton = (function () {
