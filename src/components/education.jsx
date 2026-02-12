@@ -1,21 +1,21 @@
-export default function Education({ idData, data, setData }) {
+import { useState } from 'react'
+
+export default function Education({ data, setData }) {
+
+  const [newData, setNewData] = useState(data);
 
   function handleEducation(e) {
     e.preventDefault();
-    idData.scool = data.scool;
-    idData.title = data.title;
-    idData.scills = data.scills;
-    idData.startStudy = data.startStudy;
-    idData.endStudy = data.endStudy
+    setNewData(data);
   }
 
   const lockButton = (function () {
     if (
-      data.scool === idData.scool &&
-      data.title === idData.title &&
-      data.scills === idData.scills &&
-      data.startStudy === idData.startStudy &&
-      data.endStudy === idData.endStudy
+      data.scool === newData.scool &&
+      data.title === newData.title &&
+      data.scills === newData.scills &&
+      data.startStudy === newData.startStudy &&
+      data.endStudy === newData.endStudy
     ) {
       return true;
     } else {
