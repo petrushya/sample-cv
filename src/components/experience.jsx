@@ -1,39 +1,21 @@
-import { useState } from "react";
+export default function Experience({ idData, data, setData }) {
 
-export default function Experience({ data, setData }) {
-  const companySet = data.experience ? data.experience.company : "";
-  const positionSet = data.experience ? data.experience.position : "";
-  const dutySet = data.experience ? data.experience.duty : "";
-  const startWorkSet = data.experience ? data.experience.startWork : "";
-  const endWorkSet = data.experience ? data.experience.endWork : "";
-
-  const [company, setCompany] = useState(companySet);
-  const [position, setPosition] = useState(positionSet);
-  const [duty, setDuty] = useState(dutySet);
-  const [startWork, setStartWork] = useState(startWorkSet);
-  const [endWork, setEndWork] = useState(endWorkSet);
-
-  function handleSaveExperience(e) {
+  function handleExperience(e) {
     e.preventDefault();
-    setData({
-      ...data,
-      experience: {
-        company: company,
-        position: position,
-        duty: duty,
-        startWork: startWork,
-        endWork: endWork,
-      },
-    });
+    idData.company = data.company;
+    idData.position = data.position;
+    idData.duties = data.duties;
+    idData.startWork = data.startWork;
+    idData.endWork = data.endStudy
   }
+
   const lockButton = (function () {
     if (
-      data.experience &&
-      data.experience.company === company &&
-      data.experience.position === position &&
-      data.experience.duty === duty &&
-      data.experience.startWork === startWork &&
-      data.experience.endWork === endWork
+      data.company === idData.company &&
+      data.position === idData.position &&
+      data.duties === idData.duties &&
+      data.startWork === idData.startWork &&
+      data.endWork === idData.endWork
     ) {
       return true;
     } else {
@@ -44,19 +26,19 @@ export default function Experience({ data, setData }) {
   return (
     <form
       className="element-flex dir-column top-margin"
-      onSubmit={handleSaveExperience}
+      onSubmit={handleExperience}
     >
       <h2 className="self-start">Practical experience</h2>
       <label>
         Company name:
         <input
-          key={data.nickname + "-company"}
-          id={data.nickname + "-company"}
+          key={data.id + "company"}
+          id={data.id + "company"}
           name="name of the company"
           placeholder="company"
           autoComplete="off"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
+          value={data.company}
+          onChange={(e) => setData({...data, company: e.target.value})}
           required
         />
         <span></span>
@@ -64,13 +46,13 @@ export default function Experience({ data, setData }) {
       <label>
         Position title:
         <input
-          key={data.nickname + "-position"}
-          id={data.nickname + "-position"}
+          key={data.id + "position"}
+          id={data.id + "position"}
           name="position title"
           placeholder="position"
           autoComplete="off"
-          value={position}
-          onChange={(e) => setPosition(e.target.value)}
+          value={data.position}
+          onChange={(e) => setData({...data, position: e.target.value})}
           required
         />
         <span></span>
@@ -78,18 +60,17 @@ export default function Experience({ data, setData }) {
       <label>
         Main responsibilities:
         <input
-          key={data.nickname + "-duty"}
-          id={data.nickname + "-duty"}
+          key={data.id + "duty"}
+          id={data.id + "duty"}
           name="main responsibilities"
           placeholder="responsibility"
           autoComplete="off"
-          value={duty}
-          onChange={(e) => setDuty(e.target.value)}
+          value={data.duties}
+          onChange={(e) => setData({...data, duties: e.target.value})}
           required
         />
         <span></span>
       </label>
-      <h4 className="self-start">Period of work:</h4>
       <div className="element-flex just-around">
         <label className="element-flex dir-column elem-start">
           Start work:
@@ -97,12 +78,12 @@ export default function Experience({ data, setData }) {
             <input
               className="self-start"
               type="date"
-              key={data.nickname + "-started"}
-              id={data.nickname + "-started"}
+              key={data.id + "started"}
+              id={data.id + "started"}
               name="getting started"
               autoComplete="off"
-              value={startWork}
-              onChange={(e) => setStartWork(e.target.value)}
+              value={data.startWork}
+              onChange={(e) => setData({...data, startWork: e.target.value})}
               required
             />
             <span></span>
@@ -114,19 +95,19 @@ export default function Experience({ data, setData }) {
             <input
               className="self-start"
               type="date"
-              key={data.nickname + "-finished"}
-              id={data.nickname + "-finished"}
+              key={data.id + "finished"}
+              id={data.id + "finished"}
               name="finished work"
               autoComplete="off"
-              value={endWork}
-              onChange={(e) => setEndWork(e.target.value)}
+              value={data.endWork}
+              onChange={(e) => setData({...data, endWork: e.target.value})}
             />
           </div>
         </label>
       </div>
       <button
-        key={data.nickname + "-btnExper"}
-        id={data.nickname + "-btnExper"}
+        key={data.id + "btnExper"}
+        id={data.id + "btnExper"}
         disabled={lockButton}
         className="self-center top-margin"
       >
