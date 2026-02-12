@@ -1,49 +1,88 @@
 import { useState, Fragment } from "react";
-import Nickname from "./assets/nickname";
-import Person from "./assets/person";
-import Education from "./assets/education";
-import Experience from "./assets/experience";
-import Page from "./assets/sample";
+import Person from "./components/person";
+import Education from "./components/education";
+import Experience from "./components/experience";
+import Page from "./components/sample";
 import "./App.css";
 
+const DATA = [];
+
 export default function App() {
-  const [data, setData] = useState({});
-  const [isEdit, setIsEdit] = useState(true);
 
-  const lockIsEditBtn = (function () {
-    return Object.keys(data).length === 4 ? false : true;
-  })();
+  const userIds = DATA.map(item => item.id);
+  const [nick, setNick] = useState("");
+  const idData = DATA[userIds.indexOf(nick)];
+  const initData =
+    {
+      id: "",
+      name: "",
+      surname: "",
+      email: "",
+      tel: "",
+      scool: "",
+      title: "",
+      scills: "",
+      startStudy: "",
+      endStudy: "",
+      company: "",
+      position: "",
+      startWork: "",
+      endWork: ""
+    };
 
-  function handleIsEdit() {
-    setIsEdit(!isEdit);
+  const [data, setData] = useState(initData);
+  const [preview, setPreview] = useState(true);
+
+  function handleNick(e) {
+    e.preventDefault();
+    const newData = {...data, id: nick};
+    setData(newData);
+    DATA.push(newData);
   }
+
   return (
     <>
-      {!data.nickname ? (
-        <Nickname data={data} setData={setData} />
-      ) : isEdit ? (
+      {!data.id ? (
+        <form onSubmit={handleNick}>
+          <h2>Enter nickname</h2>
+          <label>Nick (from 5 to 12 characters):
+            <input
+              key="nickPerson"
+              id="nickPerson"
+              name="nickname"
+              minLength='5'
+              maxLength='12'
+              placeholder='nickname'
+              autoComplete="off"
+              value={nick}
+              onChange={(e) => setNick(e.target.value)}
+              required
+            />
+          </label>
+          <button>confirm</button>
+        </form>
+      ) : preview ? (
         <Fragment>
-          <h2>Welcome &ldquo;{data.nickname}&rdquo;</h2>
+          <h2>Welcome &ldquo;{nick}&rdquo;</h2>
           <p>Please fill out the following form.</p>
           <hr />
-          <Person data={data} setData={setData} />
-          <Education data={data} setData={setData} />
-          <Experience data={data} setData={setData} />
+          <Person idData={idData} data={data} setData={setData} />
+          <Education idData={idData} data={data} setData={setData} />
+          <Experience idData={idData} data={data} setData={setData} />
         </Fragment>
       ) : (
-        <Sample data={data} />
+        <Sample idData={idData} />
       )}
       <hr />
-      {data.nickname && (
+      {data.id && (
         <button
-          key="isEdit"
-          id="isEdit"
+          key="preview"
+          id="preview"
           type="button"
-          onClick={handleIsEdit}
-          disabled={lockIsEditBtn}
+          onClick={()=>setPreview(!preview)}
           className="top-margin"
         >
-          {isEdit ? "save&show" : "redact"}
+          {preview ? "preview" : "redact"}
         </button>
       )}
     </>
