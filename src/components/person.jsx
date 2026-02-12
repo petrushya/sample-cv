@@ -60,8 +60,8 @@ export default function Person({ idData, data, setData }) {
           Email:
           <input
             type="email"
-            key={data.id + "-email"}
-            id={data.id + "-email"}
+            key={data.id + "email"}
+            id={data.id + "email"}
             name="email"
             placeholder="wood@good.win"
             autoComplete="off"
@@ -77,8 +77,8 @@ export default function Person({ idData, data, setData }) {
             <small className="elem-block">Format: 123-456-7890</small>
             <input
               type="tel"
-              key={data.id + "-tel"}
-              id={data.id + "-tel"}
+              key={data.id + "tel"}
+              id={data.id + "tel"}
               name="phone number"
               placeholder="123-456-7890"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
