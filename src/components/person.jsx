@@ -1,36 +1,17 @@
-import { useState } from "react";
+export default function Person({ idData, data, setData }) {
 
-export default function Person({ data, setData }) {
-  const firstSet = data.person ? data.person.firstName : "";
-  const lastSet = data.person ? data.person.lastName : "";
-  const emailSet = data.person ? data.person.email : "";
-  const telSet = data.person ? data.person.tel : "";
-
-  const [first, setFirst] = useState(firstSet);
-  const [last, setLast] = useState(lastSet);
-  const [email, setEmail] = useState(emailSet);
-  const [tel, setTel] = useState(telSet);
-
-  function handleSavePerson(e) {
+  function handlePerson(e) {
     e.preventDefault();
-    setData({
-      ...data,
-      person: {
-        firstName: first,
-        lastName: last,
-        email: email,
-        tel: tel,
-      },
-    });
+    idData.name = data.name;
+    idData.surname = data.surname;
   }
 
   const lockButton = (function () {
     if (
-      data.person &&
-      data.person.firstName === first &&
-      data.person.lastName === last &&
-      data.person.email === email &&
-      data.person.tel === tel
+      data.name === idData.name &&
+      data.surname === idData.surname &&
+      data.email === idData.email &&
+      data.tel === idData.tel
     ) {
       return true;
     } else {
@@ -42,33 +23,33 @@ export default function Person({ data, setData }) {
     <>
       <form
         className="element-flex dir-column top-margin"
-        onSubmit={handleSavePerson}
+        onSubmit={handlePerson}
       >
         <h2 className="self-start">Person details</h2>
         <label>
-          First name:
+          Name:
           <input
-            key={data.nickname + "-firstName"}
-            id={data.nickname + "-firstName"}
+            key={data.id + "name"}
+            id={data.id + "name"}
             name="first name"
             placeholder="Name"
             autoComplete="off"
-            value={first}
-            onChange={(e) => setFirst(e.target.value)}
+            value={data.name}
+            onChange={(e) => setData({...data, name: e.target.value})}
             required
           />
           <span></span>
         </label>
         <label>
-          Last name:
+          Surname:
           <input
-            key={data.nickname + "-lastName"}
-            id={data.nickname + "-lastName"}
-            name="last name"
+            key={data.id + "surname"}
+            id={data.id + "surname"}
+            name="surname"
             placeholder="Surname"
             autoComplete="off"
-            value={last}
-            onChange={(e) => setLast(e.target.value)}
+            value={data.surname}
+            onChange={(e) => setData({...data, surname: e.target.value})}
             required
           />
           <span></span>
@@ -77,13 +58,13 @@ export default function Person({ data, setData }) {
           Email:
           <input
             type="email"
-            key={data.nickname + "-email"}
-            id={data.nickname + "-email"}
+            key={data.id + "-email"}
+            id={data.id + "-email"}
             name="email"
             placeholder="wood@good.win"
             autoComplete="off"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={data.email}
+            onChange={(e) => setData({...data, email: e.target.value})}
             required
           />
           <span></span>
@@ -94,22 +75,22 @@ export default function Person({ data, setData }) {
             <small className="elem-block">Format: 123-456-7890</small>
             <input
               type="tel"
-              key={data.nickname + "-tel"}
-              id={data.nickname + "-tel"}
-              name="tel"
+              key={data.id + "-tel"}
+              id={data.id + "-tel"}
+              name="phone number"
               placeholder="123-456-7890"
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               autoComplete="off"
               value={tel}
-              onChange={(e) => setTel(e.target.value)}
+              onChange={(e) => setData({...data, tel: e.target.value})}
               required
             />
             <span></span>
           </div>
         </label>
         <button
-          key={data.nickname + "btnPerson"}
-          id={data.nickname + "btnPerson"}
+          key={data.id + "btnPerson"}
+          id={data.id + "btnPerson"}
           className="self-center top-margin"
           disabled={lockButton}
         >
