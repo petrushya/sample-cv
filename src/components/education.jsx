@@ -62,7 +62,7 @@ export default function Education({ idData, data, setData }) {
           Programming skills:
           <input
             key={data.id + "scills"}
-            id={data.id + "-scills"}
+            id={data.id + "scills"}
             name="programming skills"
             placeholder="skills"
             autoComplete="off"
