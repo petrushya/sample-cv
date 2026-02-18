@@ -13,7 +13,7 @@ export default function Person({
     setData(person);
   }
 
-  const lockButton = function () {
+  const lockButton = (function () {
     const dataArr = Object.values(data).slice(0, 4);
     const personArr = Object.values(person).slice(0, 4);
     if (personArr.filter((item) => !dataArr.includes(item)).length) {
@@ -21,7 +21,7 @@ export default function Person({
     } else {
       return false;
     }
-  };
+  });
 
   return (
     <>
@@ -96,7 +96,7 @@ export default function Person({
               <span></span>
             </div>
           </label>
-          <button name="confirm" className="sf-c t-m" disabled={lockButton}>
+          <button name="confirm" className="sf-c t-m" disabled={lockButton()}>
             confirm
           </button>
         </form>
