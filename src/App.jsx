@@ -14,7 +14,7 @@ const initData = {
     {
       id: "0-ed",
       scool: "",
-      title: "",
+      degree: "",
       scills: "",
       startStudy: "",
       endStudy: "",
@@ -53,9 +53,24 @@ export default function App() {
         {preview ? (
           <section className="e-fl d-cl">
             <h2 className="j-c">Summary form.</h2>
-            <Person data={data} setData={setData} />
-            <Education data={data} setData={setData} />
-            <Experience data={data} setData={setData} />
+            <Person
+              person={person}
+              setPerson={setPerson}
+              data={data}
+              setData={setData}
+            />
+            <Education
+              educ={educ}
+              setEduc={setEduc}
+              data={data}
+              setData={setData}
+            />
+            <Experience
+              exper={exper}
+              setExper={setExper}
+              data={data}
+              setData={setData}
+            />
           </section>
         ) : (
           <section>
