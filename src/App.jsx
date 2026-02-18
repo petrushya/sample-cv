@@ -5,55 +5,75 @@ import Experience from "./components/experience";
 import Page from "./components/sample";
 import "./App.css";
 
-export default function App() {
-
-  const initData =
+const initData = {
+  name: "",
+  surname: "",
+  email: "",
+  tel: "",
+  education: [
     {
-      id: "",
-      name: "",
-      surname: "",
-      email: "",
-      tel: "",
+      id: "0-ed",
       scool: "",
       title: "",
       scills: "",
       startStudy: "",
       endStudy: "",
+    },
+  ],
+  experience: [
+    {
+      id: "0-ex",
       company: "",
       position: "",
       duties: "",
       startWork: "",
-      endWork: ""
-    };
+      endWork: "",
+    },
+  ],
+};
 
+const startEduc = {};
+Object.assign(startEduc, initData.education[0]);
+startEduc.id = "l0-ed";
+
+const startExper = {};
+Object.assign(startExper, initData.experience[0]);
+startExper.id = "l0-ex";
+
+export default function App() {
   const [data, setData] = useState(initData);
+  const [person, setPerson] = useState(initData);
+  const [educ, setEduc] = useState([startEduc]);
+  const [exper, setExper] = useState([startExper]);
   const [preview, setPreview] = useState(true);
 
   return (
     <>
-      {preview ? (
-        <Fragment>
-          <p>Please fill out the following form.</p>
-          <hr />
-          <Person data={data} setData={setData} />
-          <hr className="hr" />
-          <Education data={data} setData={setData} />
-          <hr className="hr" />
-          <Experience data={data} setData={setData} />
-        </Fragment>
-      ) : (
-        <Page data={data} />
-      )}
-      <hr />
-      <button
-        key="preview"
-        id="preview"
-        type="button"
-        onClick={()=>setPreview(!preview)}
-        className="top-margin"
-      >
-        {preview ? "preview" : "redact"}
-      </button>
+      <main>
+        {preview ? (
+          <section className="e-fl d-cl">
+            <h2 className="j-c">Summary form.</h2>
+            <Person data={data} setData={setData} />
+            <Education data={data} setData={setData} />
+            <Experience data={data} setData={setData} />
+          </section>
+        ) : (
+          <section>
+            <Page data={data} />
+          </section>
+        )}
+        <div className="e-fl e-c">
+          <button
+            key="preview"
+            id="preview"
+            type="button"
+            onClick={() => setPreview(!preview)}
+            className="t-m"
+          >
+            {preview ? "preview" : "redact"}
+          </button>
+        </div>
+      </main>
     </>
   );
 }
