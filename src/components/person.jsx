@@ -13,27 +13,31 @@ export default function Person({
     setData(person);
   }
 
-  const lockButton = (function () {
+  function lockButton() {
     const dataArr = Object.values(data).slice(0, 4);
     const personArr = Object.values(person).slice(0, 4);
     if (personArr.filter((item) => !dataArr.includes(item)).length) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
-  });
+  }
 
   return (
-    <>
-      <div className="e-fl e-c j-b bg-gray">
+    <section>
+      <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
         <h2>General information</h2>
-        <button name="show/hide" onClick={() => setVisualP(!visualP)}>
+        <button className="bg-trs" name="show/hide" onClick={() => setVisualP(!visualP)}>
           {visualP ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
+      {visualP &&
+       <div className="e-flx jst-st pdn-ln bg-lgray">
+         <h3>Personal details</h3>
+       </div>
+      }
       {visualP && (
-        <form className="e-fl d-cl t-m" onSubmit={handlePerson}>
-          <h2 className="sf-s">Person details</h2>
+        <form className="e-flx dir-cl" onSubmit={handlePerson}>
           <label>
             Name:
             <input
@@ -76,10 +80,10 @@ export default function Person({
             />
             <span></span>
           </label>
-          <label className="e-fl">
+          <label className="e-flx">
             Phone number:
             <div>
-              <small className="e-bl">Format: 123-456-7890</small>
+              <small className="blk">Format: 123-456-7890</small>
               <input
                 type="tel"
                 id="phone"
@@ -96,11 +100,11 @@ export default function Person({
               <span></span>
             </div>
           </label>
-          <button name="confirm" className="sf-c t-m" disabled={lockButton()}>
+          <button name="confirm" className="slf-cn mrn-tp" disabled={lockButton()}>
             confirm
           </button>
         </form>
       )}
-    </>
+    </section>
   );
 }

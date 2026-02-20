@@ -1,121 +1,182 @@
-import { useState } from 'react'
+import { useState, Fragment } from "react";
 
-export default function Education({ data, setData }) {
-
-  const [newData, setNewData] = useState(data);
-
-  function handleEducation(e) {
+export default function Education({
+  initData,
+  educ,
+  setEduc,
+  data,
+  setData,
+  visualEd,
+  setVisualEd,
+}) {
+  function handleDataSave(e, idx) {
     e.preventDefault();
-    setNewData(data);
+    const helpDataObj = {};
+    Object.assign(helpDataObj, educ[idx]);
+    helpDataObj.id = educ[idx].id.slice(2);
+    const helpData = [...data.education];
+    helpData[idx] = helpDataObj;
+    setData({ ...data, education: helpData });
   }
 
-  const lockButton = (function () {
+  function handleEducValue(e, idx) {
+    const { id, value } = e.target;
+    const list = [...educ];
+    list[idx][id] = value;
+    setEduc(list);
+  }
+
+  function handleEducAdd() {
+    const helpEducObj = {};
+    const helpDataObj = {};
+    Object.assign(helpEducObj, initData.education[0]);
+    Object.assign(helpDataObj, initData.education[0]);
+    helpEducObj.id = "p-ed-" + educ.length;
+    setEduc([...educ, helpEducObj]);
+    helpDataObj.id = helpEducObj.id.slice(2);
+    setData({ ...data, education: [...data.education, helpDataObj] });
+  }
+
+  function handleEducDelete(idx) {
+    const educList = educ.filter((a, index) => index !== idx);
+    setEduc(educList);
+    const dataList = data.education.filter((a, index) => index !== idx);
+    setData({ ...data, education: dataList });
+  }
+
+  function lockButton(idx) {
+    const educArr = Object.values(educ[idx]);
+    const dataArr = Object.values(data.education[idx]);
     if (
-      data.scool === newData.scool &&
-      data.title === newData.title &&
-      data.scills === newData.scills &&
-      data.startStudy === newData.startStudy &&
-      data.endStudy === newData.endStudy
+      educArr.slice(1).filter((item) => !dataArr.slice(1).includes(item)).length
     ) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
-  })();
+  }
 
   return (
-    <>
-      <form
-        onSubmit={handleEducation}
-        className="element-flex dir-column top-margin"
-      >
-        <h2 className="self-start">Educational status</h2>
-        <label>
-          Scool name:
-          <input
-            key={data.id + "scool"}
-            id={data.id + "scool"}
-            name="name of the institution"
-            placeholder="scool"
-            autoComplete="off"
-            value={data.scool}
-            onChange={(e) => setData({...data, scool: e.target.value})}
-            required
-          />
-          <span></span>
-        </label>
-        <label>
-          Title of study:
-          <input
-            key={data.id + "title"}
-            id={data.id + "title"}
-            name="title of study"
-            placeholder="study"
-            autoComplete="off"
-            value={data.title}
-            onChange={(e) => setData({...data, title: e.target.value})}
-            required
-          />
-          <span></span>
-        </label>
-        <label>
-          Programming skills:
-          <input
-            key={data.id + "scills"}
-            id={data.id + "scills"}
-            name="programming skills"
-            placeholder="skills"
-            autoComplete="off"
-            value={data.scills}
-            onChange={(e) => setData({...data, scills: e.target.value})}
-            required
-          />
-          <span></span>
-        </label>
-        <div className="element-flex just-around">
-          <label className="element-flex dir-column elem-start">
-            Start training:
-            <div>
-              <input
-                className="self-start"
-                type="date"
-                key={data.id + "sartEduc"}
-                id={data.id + "startEduc"}
-                name="beginning of training"
-                autoComplete="off"
-                value={data.startStudy}
-                onChange={(e) => setData({...data, startStudy: e.target.value})}
-                required
-              />
-              <span></span>
-            </div>
-          </label>
-          <label className="element-flex dir-column elem-start">
-            End traning:
-            <div>
-              <input
-                className="self-start"
-                type="date"
-                key={data.id + "endStudy"}
-                id={data.id + "endStudy"}
-                name="end of traning"
-                autoComplete="off"
-                value={data.endStudy}
-                onChange={(e) => setData({...data, endStudy: e.target.value})}
-              />
-              <span></span>
-            </div>
-          </label>
-        </div>
-        <button
-          key={data.id + "btnStudy"}
-          id={data.id + "btnStudy"}
-          disabled={lockButton}
-          className="self-center top-margin"
-        >
-          confirm
+    <section className="mrn-tp">
+      <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
+        <h2>Educational status</h2>
+        <button className="bg-trs" name="visibility" onClick={() => setVisualEd(!visualEd)}>
+          {visualEd ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
-      </form>
-    </>
+      </div>
+      {visualEd && (
+        <Fragment>
+          <div className="e-flx alg-cn jst-bw pdn-ln bg-lgray">
+            <h3>Educational institution</h3>
+            <button
+              mame="addForm"
+              type="button"
+              className="bg-trs"
+              onClick={handleEducAdd}
+            >
+              more
+            </button>
+          </div>
+          {educ.map((item, index) => (
+            <form
+              key={index + "-form"}
+              onSubmit={(e) => handleDataSave(e, index)}
+              className="e-flx dir-cl"
+            >
+              {index > 0 && (
+                <div className="e-flx alg-cn mrn-btm">
+                  <button
+                    mame="deleteForm"
+                    type="button"
+                    className="btn-sml bg-trs"
+                    onClick={() => handleEducDelete(index)}
+                  >
+                    &#x1F7AC;
+                  </button>
+                </div>
+              )}
+              <label>
+                Scool name:
+                <input
+                  id="school"
+                  name="school"
+                  placeholder="school"
+                  autoComplete="off"
+                  value={item.school}
+                  onChange={(e) => handleEducValue(e, index)}
+                  required
+                />
+                <span></span>
+              </label>
+              <label>
+                Title of study:
+                <input
+                  id="degree"
+                  name="degree"
+                  placeholder="degree"
+                  autoComplete="off"
+                  value={item.degree}
+                  onChange={(e) => handleEducValue(e, index)}
+                  required
+                />
+                <span></span>
+              </label>
+              <label>
+                Programming skills:
+                <input
+                  id="scills"
+                  name="scills"
+                  placeholder="skills"
+                  autoComplete="off"
+                  value={item.scills}
+                  onChange={(e) => handleEducValue(e, index)}
+                  required
+                />
+                <span></span>
+              </label>
+              <div className="e-flx jst-arn">
+                <label className="e-flx dir-cl alg-st">
+                  Start training:
+                  <div>
+                    <input
+                      className="slf-st"
+                      type="date"
+                      id="startStudy"
+                      name="startStudy"
+                      autoComplete="off"
+                      value={item.startStudy}
+                      onChange={(e) => handleEducValue(e, index)}
+                      required
+                    />
+                    <span></span>
+                  </div>
+                </label>
+                <label className="e-flx dir-cl alg-st">
+                  End traning:
+                  <div>
+                    <input
+                      className="slf-st"
+                      type="date"
+                      id="endStudy"
+                      name="endStudy"
+                      autoComplete="off"
+                      value={item.endStudy}
+                      onChange={(e) => handleEducValue(e, index)}
+                    />
+                  </div>
+                </label>
+              </div>
+              <button
+                name="confirm"
+                disabled={(() => lockButton(index))()}
+                className="slf-cn mrn-tp"
+              >
+                confirm
+              </button>
+            </form>
+          ))}
+        </Fragment>
+      )}
+    </section>
   );
 }

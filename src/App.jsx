@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Person from "./components/person";
 import Education from "./components/education";
 import Experience from "./components/experience";
@@ -12,8 +12,8 @@ const initData = {
   phone: "",
   education: [
     {
-      id: "0-ed",
-      scool: "",
+      id: "ed-0",
+      school: "",
       degree: "",
       scills: "",
       startStudy: "",
@@ -22,7 +22,7 @@ const initData = {
   ],
   experience: [
     {
-      id: "0-ex",
+      id: "ex-0",
       company: "",
       position: "",
       duties: "",
@@ -32,66 +32,68 @@ const initData = {
   ],
 };
 
-const startEduc = {};
-Object.assign(startEduc, initData.education[0]);
-startEduc.id = "l0-ed";
+const helpEducObj = {};
+Object.assign(helpEducObj, initData.education[0]);
+helpEducObj.id = "p-ed-0";
 
-const startExper = {};
-Object.assign(startExper, initData.experience[0]);
-startExper.id = "l0-ex";
+const helpExpertObj = {};
+Object.assign(helpExpertObj, initData.experience[0]);
+helpExpertObj.id = "p-ex-0";
 
 export default function App() {
   const [data, setData] = useState(initData);
   const [person, setPerson] = useState(initData);
-  const [educ, setEduc] = useState([startEduc]);
-  const [exper, setExper] = useState([startExper]);
+  const [educ, setEduc] = useState([helpEducObj]);
+  const [expert, setExpert] = useState([helpExpertObj]);
   const [preview, setPreview] = useState(true);
-  const [visualP, setVisualP] = useState(false);
-  const [visualEd, setVisualEd] = useState(false);
-  const [visualEx, setVisualEx] = useState(false);
+  const [visualPerson, setVisualPerson] = useState(false);
+  const [visualEduc, setVisualEduc] = useState(false);
+  const [visualExpert, setVisualExpert] = useState(false);
 
   return (
     <main>
       {preview ? (
-        <section className="e-fl d-cl">
-          <h2 className="j-c">Summary form.</h2>
+        <Fragment>
+          <h1>Summary form</h1>
           <Person
             person={person}
             setPerson={setPerson}
             data={data}
             setData={setData}
-            visual={visualP}
-            setVisual={setVisualP}
+            visualP={visualPerson}
+            setVisualP={setVisualPerson}
           />
           <Education
+            initData={initData}
             educ={educ}
             setEduc={setEduc}
             data={data}
             setData={setData}
-            visual={visualEd}
-            setVisual={setVisualEd}
+            visualEd={visualEduc}
+            setVisualEd={setVisualEduc}
           />
           <Experience
-            exper={exper}
-            setExper={setExper}
+            initData={initData}
+            expert={expert}
+            setExpert={setExpert}
             data={data}
             setData={setData}
-            visual={visualEx}
-            setVisual={setVisualEx}
+            visualEx={visualExpert}
+            setVisualEx={setVisualExpert}
           />
-        </section>
+        </Fragment>
       ) : (
-        <section>
+        <Fragment>
           <Page data={data} />
-        </section>
+        </Fragment>
       )}
-      <div className="e-fl e-c">
+      <div className="e-flx alg-cn">
         <button
           key="preview"
           id="preview"
           type="button"
           onClick={() => setPreview(!preview)}
-          className="t-m"
+          className="mrn-tp"
         >
           {preview ? "preview" : "redact"}
         </button>
