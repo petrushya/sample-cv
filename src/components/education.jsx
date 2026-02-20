@@ -60,7 +60,11 @@ export default function Education({
     <section className="mrn-tp">
       <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
         <h2>Educational status</h2>
-        <button className="bg-trs" name="visibility" onClick={() => setVisualEd(!visualEd)}>
+        <button
+          className="bg-trs"
+          name="visibility"
+          onClick={() => setVisualEd(!visualEd)}
+        >
           {visualEd ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
