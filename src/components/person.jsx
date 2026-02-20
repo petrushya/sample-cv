@@ -27,15 +27,19 @@ export default function Person({
     <section>
       <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
         <h2>General information</h2>
-        <button className="bg-trs" name="show/hide" onClick={() => setVisualP(!visualP)}>
+        <button
+          className="bg-trs"
+          name="show/hide"
+          onClick={() => setVisualP(!visualP)}
+        >
           {visualP ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
-      {visualP &&
-       <div className="e-flx jst-st pdn-ln bg-lgray">
-         <h3>Personal details</h3>
-       </div>
-      }
+      {visualP && (
+        <div className="e-flx jst-st pdn-ln bg-lgray">
+          <h3>Personal details</h3>
+        </div>
+      )}
       {visualP && (
         <form className="e-flx dir-cl" onSubmit={handlePerson}>
           <label>
@@ -100,7 +104,11 @@ export default function Person({
               <span></span>
             </div>
           </label>
-          <button name="confirm" className="slf-cn mrn-tp" disabled={lockButton()}>
+          <button
+            name="confirm"
+            className="slf-cn mrn-tp"
+            disabled={lockButton()}
+          >
             confirm
           </button>
         </form>
