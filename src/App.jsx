@@ -51,7 +51,7 @@ export default function App() {
   const [visualExpert, setVisualExpert] = useState(false);
 
   return (
-    <main>
+    <main className="f-flx dir-cl flx-1">
       {preview ? (
         <Fragment>
           <h1>Summary form</h1>
@@ -83,9 +83,7 @@ export default function App() {
           />
         </Fragment>
       ) : (
-        <Fragment>
-          <Page data={data} />
-        </Fragment>
+        <Page data={data} person={person} educ={educ} expert={expert} />
       )}
       <div className="e-flx alg-cn">
         <button
