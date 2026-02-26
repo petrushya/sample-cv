@@ -22,9 +22,9 @@ export default function Person({
   }
 
   return (
-    <section>
-      <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
-        <h2>General information</h2>
+    <section className="all-bdr">
+      <div className="e-flx jst-bw pdn-ln bg-gray">
+        <h2 className="pdn-bl">General information</h2>
         <button
           className="bg-trs"
           name="show/hide"
@@ -34,17 +34,12 @@ export default function Person({
         </button>
       </div>
       {visualP && (
-        <div className="e-flx jst-st pdn-ln bg-lgray">
-          <h3>Personal details</h3>
-        </div>
-      )}
-      {visualP && (
-        <form className="e-flx dir-cl" onSubmit={handlePerson}>
+        <form className="e-flx aln-d dir-cl" onSubmit={handlePerson}>
           <label>
             Name:
             <input
               id="name"
-              name="first name"
+              name="name"
               placeholder="Name"
               autoComplete="off"
               value={person.name}
@@ -82,14 +77,14 @@ export default function Person({
             />
             <span></span>
           </label>
-          <label className="e-flx">
+          <label className="e-flx aln-d">
             Phone number:
             <div>
               <small className="blk">Format: 123-456-7890</small>
               <input
                 type="tel"
                 id="phone"
-                name="phone number"
+                name="phone"
                 placeholder="123-456-7890"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 autoComplete="off"
@@ -104,7 +99,7 @@ export default function Person({
           </label>
           <button
             name="confirm"
-            className="slf-cn mrn-tp"
+            className="slf-c mrn-t"
             disabled={lockButton()}
           >
             confirm

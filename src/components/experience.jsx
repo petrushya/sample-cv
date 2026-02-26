@@ -31,7 +31,7 @@ export default function Experience({
     const helpDataObj = {};
     Object.assign(helpExpertObj, initData.experience[0]);
     Object.assign(helpDataObj, initData.experience[0]);
-    helpExpertObj.id = "p-ed-" + expert.length;
+    helpExpertObj.id = "p-ex-" + expert.length;
     setExpert([...expert, helpExpertObj]);
     helpDataObj.id = helpExpertObj.id.slice(2);
     setData({ ...data, experience: [...data.experience, helpDataObj] });
@@ -58,9 +58,9 @@ export default function Experience({
   }
 
   return (
-    <section className="mrn-tp">
-      <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
-        <h2>Practical experience</h2>
+    <section className="mrn-t all-bdr">
+      <div className="e-flx aln-c jst-bw pdn-ln bg-gray">
+        <h2 className="pdn-bl">Practical experience</h2>
         <button
           className="bg-trs"
           name="visibility"
@@ -69,42 +69,40 @@ export default function Experience({
           {visualEx ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
-      {visualEx && (
-        <Fragment>
-          <div className="e-flx alg-cn jst-bw pdn-ln bg-lgray">
-            <h3>Place of work</h3>
-            <button
-              mame="addForm"
-              type="button"
-              className="bg-trs"
-              onClick={handleExpertAdd}
-            >
-              more
-            </button>
-          </div>
-          {expert.map((item, index) => (
-            <form
-              key={index + "formEx"}
-              onSubmit={(e) => handleDataSave(e, index)}
-              className="e-flx dir-cl"
-            >
-              {index > 0 && (
-                <div className="e-flx alg-cn mrn-btm">
-                  <button
-                    mame="deleteForm"
-                    type="button"
-                    className="btn-sml bg-trs"
-                    onClick={() => handleExpertDelete(index)}
-                  >
-                    &#x1F7AC;
-                  </button>
-                </div>
+      {visualEx &&
+        expert.map((item, index) => (
+          <Fragment key={index + "formEx"}>
+            <div className="e-flx jst-bw pdn-ln bg-lgray">
+              <h3 className="pdn-bl">Place of work</h3>
+              {index > 0 ? (
+                <button
+                  mame="deleteForm"
+                  type="button"
+                  className="bg-trs"
+                  onClick={() => handleExpertDelete(index)}
+                >
+                  &#x1F7AC;
+                </button>
+              ) : (
+                <button
+                  mame="addForm"
+                  type="button"
+                  className="bg-trs"
+                  onClick={handleExpertAdd}
+                >
+                  more
+                </button>
               )}
+            </div>
+            <form
+              onSubmit={(e) => handleDataSave(e, index)}
+              className="e-flx aln-d dir-cl"
+            >
               <label>
                 Company name:
                 <input
                   id="company"
-                  name="name of the company"
+                  name="company"
                   placeholder="company"
                   autoComplete="off"
                   value={item.company}
@@ -117,7 +115,7 @@ export default function Experience({
                 Position title:
                 <input
                   id="position"
-                  name="position title"
+                  name="position"
                   placeholder="position"
                   autoComplete="off"
                   value={item.position}
@@ -130,8 +128,8 @@ export default function Experience({
                 Main responsibilities:
                 <input
                   id="duties"
-                  name="main responsibilities"
-                  placeholder="responsibility"
+                  name="duties"
+                  placeholder="duties"
                   autoComplete="off"
                   value={item.duties}
                   onChange={(e) => handleExpertValue(e, index)}
@@ -139,15 +137,15 @@ export default function Experience({
                 />
                 <span></span>
               </label>
-              <div className="e-flx jst-arn">
-                <label className="e-flx dir-cl alg-st">
+              <div className="e-flx jst-ar dw-100">
+                <label className="e-flx dir-cl aln-t">
                   Start work:
                   <div>
                     <input
                       id="startWork"
                       type="date"
-                      name="getting started"
-                      className="slf-st"
+                      name="started"
+                      className="mrn-lt-n"
                       autoComplete="off"
                       value={item.startWork}
                       onChange={(e) => handleExpertValue(e, index)}
@@ -156,14 +154,14 @@ export default function Experience({
                     <span></span>
                   </div>
                 </label>
-                <label className="e-flx dir-cl alg-st">
+                <label className="e-flx dir-cl aln-t">
                   End work:
                   <div>
                     <input
                       id="endWork"
                       type="date"
-                      name="finished work"
-                      className="slf-st"
+                      name="finished"
+                      className="mrn-lt-n"
                       autoComplete="off"
                       value={item.endWork}
                       onChange={(e) => handleExpertValue(e, index)}
@@ -174,14 +172,13 @@ export default function Experience({
               <button
                 name="confirm"
                 disabled={(() => lockButton(index))()}
-                className="slf-cn mrn-tp"
+                className="slf-c mrn-t"
               >
                 confirm
               </button>
             </form>
-          ))}
-        </Fragment>
-      )}
+          </Fragment>
+        ))}
     </section>
   );
 }

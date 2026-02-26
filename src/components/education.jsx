@@ -57,9 +57,9 @@ export default function Education({
   }
 
   return (
-    <section className="mrn-tp">
-      <div className="e-flx alg-cn jst-bw pdn-ln bg-gray">
-        <h2>Educational status</h2>
+    <section className="mrn-t all-bdr">
+      <div className="e-flx jst-bw pdn-ln bg-gray">
+        <h2 className="pdn-bl">Educational status</h2>
         <button
           className="bg-trs"
           name="visibility"
@@ -68,37 +68,35 @@ export default function Education({
           {visualEd ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
-      {visualEd && (
-        <Fragment>
-          <div className="e-flx alg-cn jst-bw pdn-ln bg-lgray">
-            <h3>Educational institution</h3>
-            <button
-              mame="addForm"
-              type="button"
-              className="bg-trs"
-              onClick={handleEducAdd}
-            >
-              more
-            </button>
-          </div>
-          {educ.map((item, index) => (
-            <form
-              key={index + "-form"}
-              onSubmit={(e) => handleDataSave(e, index)}
-              className="e-flx dir-cl"
-            >
-              {index > 0 && (
-                <div className="e-flx alg-cn mrn-btm">
-                  <button
-                    mame="deleteForm"
-                    type="button"
-                    className="btn-sml bg-trs"
-                    onClick={() => handleEducDelete(index)}
-                  >
-                    &#x1F7AC;
-                  </button>
-                </div>
+      {visualEd &&
+        educ.map((item, index) => (
+          <Fragment key={index + "-form"}>
+            <div className="e-flx jst-bw pdn-ln bg-lgray">
+              <h3 className="pdn-bl">Training institution</h3>
+              {index > 0 ? (
+                <button
+                  mame="deleteForm"
+                  type="button"
+                  className="bg-trs"
+                  onClick={() => handleEducDelete(index)}
+                >
+                  &#x1F7AC;
+                </button>
+              ) : (
+                <button
+                  mame="addForm"
+                  type="button"
+                  className="bg-trs"
+                  onClick={handleEducAdd}
+                >
+                  more
+                </button>
               )}
+            </div>
+            <form
+              onSubmit={(e) => handleDataSave(e, index)}
+              className="e-flx aln-d dir-cl"
+            >
               <label>
                 Scool name:
                 <input
@@ -115,11 +113,11 @@ export default function Education({
               <label>
                 Title of study:
                 <input
-                  id="degree"
-                  name="degree"
-                  placeholder="degree"
+                  id="title"
+                  name="title"
+                  placeholder="title"
                   autoComplete="off"
-                  value={item.degree}
+                  value={item.title}
                   onChange={(e) => handleEducValue(e, index)}
                   required
                 />
@@ -128,22 +126,22 @@ export default function Education({
               <label>
                 Programming skills:
                 <input
-                  id="scills"
-                  name="scills"
+                  id="skills"
+                  name="skills"
                   placeholder="skills"
                   autoComplete="off"
-                  value={item.scills}
+                  value={item.skills}
                   onChange={(e) => handleEducValue(e, index)}
                   required
                 />
                 <span></span>
               </label>
-              <div className="e-flx jst-arn">
-                <label className="e-flx dir-cl alg-st">
+              <div className="e-flx jst-ar dw-100">
+                <label className="e-flx dir-cl aln-t">
                   Start training:
                   <div>
                     <input
-                      className="slf-st"
+                      className="mrn-lt-n"
                       type="date"
                       id="startStudy"
                       name="startStudy"
@@ -155,11 +153,11 @@ export default function Education({
                     <span></span>
                   </div>
                 </label>
-                <label className="e-flx dir-cl alg-st">
+                <label className="e-flx dir-cl aln-t">
                   End traning:
                   <div>
                     <input
-                      className="slf-st"
+                      className="mrn-lt-n"
                       type="date"
                       id="endStudy"
                       name="endStudy"
@@ -173,14 +171,13 @@ export default function Education({
               <button
                 name="confirm"
                 disabled={(() => lockButton(index))()}
-                className="slf-cn mrn-tp"
+                className="slf-c mrn-t"
               >
                 confirm
               </button>
             </form>
-          ))}
-        </Fragment>
-      )}
+          </Fragment>
+        ))}
     </section>
   );
 }
