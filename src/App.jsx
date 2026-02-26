@@ -14,8 +14,8 @@ const initData = {
     {
       id: "ed-0",
       school: "",
-      degree: "",
-      scills: "",
+      title: "",
+      skills: "",
       startStudy: "",
       endStudy: "",
     },
@@ -51,7 +51,7 @@ export default function App() {
   const [visualExpert, setVisualExpert] = useState(false);
 
   return (
-    <main className="f-flx dir-cl flx-1">
+    <>
       {preview ? (
         <Fragment>
           <h1>Summary form</h1>
@@ -85,17 +85,16 @@ export default function App() {
       ) : (
         <Page data={data} person={person} educ={educ} expert={expert} />
       )}
-      <div className="e-flx alg-cn">
+      <div className="mrn-t">
         <button
-          key="preview"
           id="preview"
           type="button"
           onClick={() => setPreview(!preview)}
-          className="mrn-tp"
+          className="mrn-t"
         >
           {preview ? "preview" : "redact"}
         </button>
       </div>
-    </main>
+    </>
   );
 }
