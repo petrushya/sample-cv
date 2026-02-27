@@ -45,7 +45,7 @@ export default function Page({ data, person, educ, expert }) {
                 Title of the study: <em className="fnt-lsz">"{item.title}"</em>.
               </span>
               <span className="mrn-bt">
-                Main skills: <em className=" fnt-lsz">{item.skills}</em>.
+                Main skills: <em className="fnt-lsz">{item.skills}</em>.
               </span>
             </div>
           </div>
