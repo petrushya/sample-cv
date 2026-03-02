@@ -20,9 +20,9 @@ export default function Education({
   }
 
   function handleEducValue(e, idx) {
-    const { id, value } = e.target;
+    const { name, value } = e.target;
     const list = [...educ];
-    list[idx][id] = value;
+    list[idx][name] = value;
     setEduc(list);
   }
 
@@ -100,7 +100,7 @@ export default function Education({
               <label>
                 Scool name:
                 <input
-                  id="school"
+                  id={"school-" + index}
                   name="school"
                   placeholder="school"
                   autoComplete="off"
@@ -113,7 +113,7 @@ export default function Education({
               <label>
                 Title of study:
                 <input
-                  id="title"
+                  id={"title-" + index}
                   name="title"
                   placeholder="title"
                   autoComplete="off"
@@ -126,7 +126,7 @@ export default function Education({
               <label>
                 Programming skills:
                 <input
-                  id="skills"
+                  id={"skills-" + index}
                   name="skills"
                   placeholder="skills"
                   autoComplete="off"
@@ -143,7 +143,7 @@ export default function Education({
                     <input
                       className="mrn-lt-n"
                       type="date"
-                      id="startStudy"
+                      id={"startStudy-" + index}
                       name="startStudy"
                       autoComplete="off"
                       value={item.startStudy}
@@ -159,7 +159,7 @@ export default function Education({
                     <input
                       className="mrn-lt-n"
                       type="date"
-                      id="endStudy"
+                      id={"endStudy-" + index}
                       name="endStudy"
                       autoComplete="off"
                       value={item.endStudy}

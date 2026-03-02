@@ -20,9 +20,9 @@ export default function Experience({
   }
 
   function handleExpertValue(e, idx) {
-    const { id, value } = e.target;
+    const { name, value } = e.target;
     const list = [...expert];
-    list[idx][id] = value;
+    list[idx][name] = value;
     setExpert(list);
   }
 
@@ -101,7 +101,7 @@ export default function Experience({
               <label>
                 Company name:
                 <input
-                  id="company"
+                  id={"company-" + index}
                   name="company"
                   placeholder="company"
                   autoComplete="off"
@@ -114,7 +114,7 @@ export default function Experience({
               <label>
                 Position title:
                 <input
-                  id="position"
+                  id={"position-" + index}
                   name="position"
                   placeholder="position"
                   autoComplete="off"
@@ -127,7 +127,7 @@ export default function Experience({
               <label>
                 Main responsibilities:
                 <input
-                  id="duties"
+                  id={"duties-" + index}
                   name="duties"
                   placeholder="duties"
                   autoComplete="off"
@@ -142,9 +142,9 @@ export default function Experience({
                   Start work:
                   <div>
                     <input
-                      id="startWork"
+                      id={"startWork-" + index}
                       type="date"
-                      name="started"
+                      name="startWork"
                       className="mrn-lt-n"
                       autoComplete="off"
                       value={item.startWork}
@@ -158,9 +158,9 @@ export default function Experience({
                   End work:
                   <div>
                     <input
-                      id="endWork"
+                      id={"endWork-" + index}
                       type="date"
-                      name="finished"
+                      name="endWork"
                       className="mrn-lt-n"
                       autoComplete="off"
                       value={item.endWork}
