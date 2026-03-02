@@ -106,6 +106,7 @@ export default function Education({
                   autoComplete="off"
                   value={item.school}
                   onChange={(e) => handleEducValue(e, index)}
+                  autoFocus
                   required
                 />
                 <span></span>

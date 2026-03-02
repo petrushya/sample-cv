@@ -44,6 +44,7 @@ export default function Person({
               autoComplete="off"
               value={person.name}
               onChange={(e) => setPerson({ ...person, name: e.target.value })}
+              autoFocus
               required
             />
             <span></span>

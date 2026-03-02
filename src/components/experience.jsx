@@ -107,6 +107,7 @@ export default function Experience({
                   autoComplete="off"
                   value={item.company}
                   onChange={(e) => handleExpertValue(e, index)}
+                  autoFocus
                   required
                 />
                 <span></span>
