@@ -1,7 +1,7 @@
 #root {
   max-width: 70ch;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 4rem 0 2rem;
   text-align: center;
   --gray-color: color-mix(in oklch, graytext 16%, field);
   --light-gray-color: color-mix(in oklch, graytext 8%, field);
@@ -29,7 +29,9 @@ h1 {
 }
 
 form {
-  padding: 2ch;
+  padding: 2ch 0;
+  margin: 0 auto;
+  width: 40ch;
 }
 
 form + div {
@@ -37,11 +39,12 @@ form + div {
 }
 
 label {
-  margin-bottom: 0.5rem;
+  display: block;
+  text-align: left;
 }
 
 input {
-  margin: 0 1ch;
+  flex-grow: 1;
   font-size: 1rem;
 }
 
@@ -67,11 +70,11 @@ input:required:valid + span::before {
 }
 
 .mrn-t {
-  margin-top: 0.35em;
+  margin-top: 0.5rem;
 }
 
 .mrn-bt {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .pdn-bl {
@@ -90,6 +93,14 @@ input:required:valid + span::before {
   column-gap: 1ch;
 }
 
+.flx-wrp {
+  flex-wrap: wrap;
+}
+
+.flx-b {
+  flex-basis: 100%;
+}
+
 .aln-d {
   align-items: flex-end;
 }
@@ -100,10 +111,6 @@ input:required:valid + span::before {
 
 .dir-cl {
   flex-direction: column;
-}
-
-.mrn-lt-n {
-  margin-left: 0;
 }
 
 .jst-bw {
@@ -124,6 +131,10 @@ input:required:valid + span::before {
 
 .txt-rt {
   text-align: right;
+}
+
+.mrn-lt {
+  margin-left: 1ch;
 }
 
 .blk {

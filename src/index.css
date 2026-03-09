@@ -16,7 +16,7 @@
 body {
   margin: 0;
   display: flex;
-  gap: 1lh;
+  gap: 2ch;
   place-items: center;
   min-width: 50ch;
   min-height: 100vh;
