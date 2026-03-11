@@ -1,174 +1,151 @@
-import { Fragment } from "react";
+import { useState } from "react";
 
 export default function Experience({
-  initData,
-  expert,
-  setExpert,
   data,
   setData,
+  preview,
   visualEx,
   setVisualEx,
 }) {
-  function handleDataSave(e, idx) {
-    e.preventDefault();
-    const helpDataObj = {};
-    Object.assign(helpDataObj, expert[idx]);
-    helpDataObj.id = expert[idx].id.slice(2);
+  const lists = data.experience.map((item) => Object.assign({}, item));
+  const [expert, setExpert] = useState(lists);
+
+  function handleDataValue(e, idx) {
+    const { name, value } = e.target;
     const helpData = [...data.experience];
-    helpData[idx] = helpDataObj;
+    helpData[idx][name] = value;
     setData({ ...data, experience: helpData });
   }
 
-  function handleExpertValue(e, idx) {
-    const { name, value } = e.target;
-    const list = [...expert];
-    list[idx][name] = value;
-    setExpert(list);
+  function handleEducSave(e) {
+    e.preventDefault();
+    setExpert(data.experience.map((item) => Object.assign({}, item)));
   }
 
-  function handleExpertAdd() {
-    const helpExpertObj = {};
-    const helpDataObj = {};
-    Object.assign(helpExpertObj, initData.experience[0]);
-    Object.assign(helpDataObj, initData.experience[0]);
-    helpExpertObj.id = "p-ex-" + expert.length;
-    setExpert([...expert, helpExpertObj]);
-    helpDataObj.id = helpExpertObj.id.slice(2);
-    setData({ ...data, experience: [...data.experience, helpDataObj] });
+  function handleAddLine() {
+    const helpDL = {};
+    Object.keys(Object.assign({}, lists[0])).map((key) => (helpDL[key] = ""));
+    setData({ ...data, experience: [...data.experience, helpDL] });
+    const helpEL = {};
+    Object.keys(Object.assign({}, lists[0])).map((key) => (helpEL[key] = ""));
+    setExpert([...expert, helpEL]);
   }
 
-  function handleExpertDelete(idx) {
-    const expertList = expert.filter((a, index) => index !== idx);
-    setExpert(expertList);
+  function handleDeleteLine(idx) {
     const dataList = data.experience.filter((a, index) => index !== idx);
     setData({ ...data, experience: dataList });
+    const expertList = expert.filter((a, index) => index !== idx);
+    setExpert(expertList);
   }
 
   function lockButton(idx) {
     const expertArr = Object.values(expert[idx]);
     const dataArr = Object.values(data.experience[idx]);
-    if (
-      expertArr.slice(1).filter((item) => !dataArr.slice(1).includes(item))
-        .length
-    ) {
+    if (dataArr.filter((item) => !expertArr.includes(item)).length) {
       return false;
     } else {
       return true;
     }
   }
 
-  return (
-    <section className="mrn-t all-bdr">
-      <div className="e-flx aln-c jst-bw pdn-ln bg-gray">
+  function handleFaceForm() {
+    setVisualEx(!visualEx);
+  }
+
+  const viewForm = (
+    <>
+      <div className="e-flx jst-bw pdn-ln bg-gray">
         <h2 className="pdn-bl">Practical experience</h2>
-        <button
-          className="bg-trs"
-          name="visibility"
-          onClick={() => setVisualEx(!visualEx)}
-        >
+        <button className="bg-trs" name="visibilityEx" onClick={handleFaceForm}>
           {visualEx ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
       {visualEx &&
-        expert.map((item, index) => (
-          <Fragment key={index + "formEx"}>
+        data.experience.map((item, index) => (
+          <div key={"org" + index} className="form">
             <div className="e-flx jst-bw pdn-ln bg-lgray">
               <h3 className="pdn-bl">Place of work</h3>
-              {index > 0 ? (
-                <button
-                  mame="deleteForm"
-                  type="button"
-                  className="bg-trs"
-                  onClick={() => handleExpertDelete(index)}
-                >
-                  &#x1F7AC;
-                </button>
-              ) : (
-                <button
-                  mame="addForm"
-                  type="button"
-                  className="bg-trs"
-                  onClick={handleExpertAdd}
-                >
-                  more
-                </button>
-              )}
+              <button
+                mame="controlForm"
+                type="button"
+                className="bg-trs"
+                onClick={
+                  index > 0 ? () => handleDeleteLine(index) : handleAddLine
+                }
+              >
+                {index > 0 ? <span>&#x1F7AC;</span> : "more"}
+              </button>
             </div>
             <form
-              onSubmit={(e) => handleDataSave(e, index)}
-              className="e-flx aln-d dir-cl"
+              key={"expert" + index}
+              onSubmit={handleEducSave}
+              className="e-flx dir-cl"
             >
-              <label>
-                Company name:
-                <input
-                  id={"company-" + index}
-                  name="company"
-                  placeholder="company"
-                  autoComplete="off"
-                  value={item.company}
-                  onChange={(e) => handleExpertValue(e, index)}
-                  autoFocus
-                  required
-                />
-                <span></span>
-              </label>
-              <label>
-                Position title:
-                <input
-                  id={"position-" + index}
-                  name="position"
-                  placeholder="position"
-                  autoComplete="off"
-                  value={item.position}
-                  onChange={(e) => handleExpertValue(e, index)}
-                  required
-                />
-                <span></span>
-              </label>
-              <label>
-                Main responsibilities:
-                <input
-                  id={"duties-" + index}
-                  name="duties"
-                  placeholder="duties"
-                  autoComplete="off"
-                  value={item.duties}
-                  onChange={(e) => handleExpertValue(e, index)}
-                  required
-                />
-                <span></span>
-              </label>
-              <div className="e-flx jst-ar dw-100">
-                <label className="e-flx dir-cl aln-t">
-                  Start work:
-                  <div>
-                    <input
-                      id={"startWork-" + index}
-                      type="date"
-                      name="startWork"
-                      className="mrn-lt-n"
-                      autoComplete="off"
-                      value={item.startWork}
-                      onChange={(e) => handleExpertValue(e, index)}
-                      required
-                    />
-                    <span></span>
-                  </div>
-                </label>
-                <label className="e-flx dir-cl aln-t">
-                  End work:
-                  <div>
-                    <input
-                      id={"endWork-" + index}
-                      type="date"
-                      name="endWork"
-                      className="mrn-lt-n"
-                      autoComplete="off"
-                      value={item.endWork}
-                      onChange={(e) => handleExpertValue(e, index)}
-                    />
-                  </div>
-                </label>
+              {Object.keys(item).map(
+                (key) =>
+                  !key.match("Work") && (
+                    <div
+                      key={"ex" + key + index}
+                      className="e-flx flx-wrp mrn-bt dw-100"
+                    >
+                      <label htmlFor={key + index} className="flx-b">
+                        {key === "company"
+                          ? "Company name:"
+                          : key === "position"
+                            ? "Position title:"
+                            : "Main responsibilities:"}
+                      </label>
+                      <div className="flx-b e-flx aln-t">
+                        <input
+                          id={key + index}
+                          name={key}
+                          placeholder={
+                            key === "company"
+                              ? "Company name"
+                              : key === "position"
+                                ? "Position title"
+                                : "Responsibilities"
+                          }
+                          autoComplete="off"
+                          value={data.experience[index][key]}
+                          onChange={(e) => handleDataValue(e, index)}
+                          autoFocus={key === "company" ? true : false}
+                          required
+                        />
+                        <span></span>
+                      </div>
+                    </div>
+                  ),
+              )}
+              <div key="expertDate" className="e-flx dw-100 mrn-bt">
+                {Object.keys(item).map(
+                  (key) =>
+                    key.match("Work") && (
+                      <div
+                        key={"ex" + key + index}
+                        className={
+                          "e-flx dir-cl flx-b" +
+                          (key === "endWork" ? " mrn-lt" : "")
+                        }
+                      >
+                        <label htmlFor={key + index} className="dw-100">
+                          {key === "startWork" ? "Start work:" : "End work:"}
+                        </label>
+                        <div className={"e-flx aln-t dw-100"}>
+                          <input
+                            id={key + index}
+                            name={key}
+                            type="date"
+                            autoComplete="off"
+                            value={data.experience[index][key]}
+                            onChange={(e) => handleDataValue(e, index)}
+                            required={key === "startWork" ? true : false}
+                          />
+                          <span></span>
+                        </div>
+                      </div>
+                    ),
+                )}
               </div>
               <button
                 name="confirm"
@@ -178,8 +155,44 @@ export default function Experience({
                 confirm
               </button>
             </form>
-          </Fragment>
+          </div>
         ))}
+    </>
+  );
+
+  const viewSample = (
+    <>
+      <h3 className="pdn-bl">Experience</h3>
+      {data.experience.map((item, index) => (
+        <div key={index + "sample"} className="bdr-t pdn-bl dw-100">
+          <div className="e-flx aln-t jst-bw mrn-bt">
+            <span className="fnt-lsz txt-lt">
+              <em>
+                <strong>{item.company}</strong>
+              </em>
+            </span>
+            <span className="txt-rt">
+              Work from {item.startWork || '" "'}
+              <br />
+              to {item.endWork || "the present"}
+            </span>
+          </div>
+          <div className="e-flx dir-cl aln-t txt-lt">
+            <span className="mrn-bt">
+              Position title: <em className="fnt-lsz">{item.position}</em>
+            </span>
+            <span>
+              Responsibilities: <em className="fnt-lsz">{item.duties}</em>
+            </span>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+
+  return (
+    <section className={preview ? "all-bdr" : "e-flx dir-cl pdn-ln bdr-bt"}>
+      {preview ? viewForm : viewSample}
     </section>
   );
 }
