@@ -1,173 +1,153 @@
-import { Fragment } from "react";
+import { useState } from "react";
 
 export default function Education({
-  initData,
-  educ,
-  setEduc,
   data,
   setData,
+  preview,
   visualEd,
   setVisualEd,
 }) {
-  function handleDataSave(e, idx) {
-    e.preventDefault();
-    const helpDataObj = {};
-    Object.assign(helpDataObj, educ[idx]);
-    helpDataObj.id = educ[idx].id.slice(2);
+  const lists = data.education.map((item) => Object.assign({}, item));
+  const [educ, setEduc] = useState(lists);
+
+  function handleDataValue(e, idx) {
+    const { name, value } = e.target;
     const helpData = [...data.education];
-    helpData[idx] = helpDataObj;
+    helpData[idx][name] = value;
     setData({ ...data, education: helpData });
   }
 
-  function handleEducValue(e, idx) {
-    const { name, value } = e.target;
-    const list = [...educ];
-    list[idx][name] = value;
-    setEduc(list);
+  function handleEducSave(e) {
+    e.preventDefault();
+    setEduc(data.education.map((item) => Object.assign({}, item)));
   }
 
-  function handleEducAdd() {
-    const helpEducObj = {};
-    const helpDataObj = {};
-    Object.assign(helpEducObj, initData.education[0]);
-    Object.assign(helpDataObj, initData.education[0]);
-    helpEducObj.id = "p-ed-" + educ.length;
-    setEduc([...educ, helpEducObj]);
-    helpDataObj.id = helpEducObj.id.slice(2);
-    setData({ ...data, education: [...data.education, helpDataObj] });
+  function handleAddLine() {
+    const helpDL = {};
+    Object.keys(Object.assign({}, lists[0])).map((key) => (helpDL[key] = ""));
+    setData({ ...data, education: [...data.education, helpDL] });
+    const helpEL = {};
+    Object.keys(Object.assign({}, lists[0])).map((key) => (helpEL[key] = ""));
+    setEduc([...educ, helpEL]);
   }
 
-  function handleEducDelete(idx) {
-    const educList = educ.filter((a, index) => index !== idx);
-    setEduc(educList);
+  function handleDeleteLine(idx) {
     const dataList = data.education.filter((a, index) => index !== idx);
     setData({ ...data, education: dataList });
+    const educList = educ.filter((a, index) => index !== idx);
+    setEduc(educList);
   }
 
   function lockButton(idx) {
     const educArr = Object.values(educ[idx]);
     const dataArr = Object.values(data.education[idx]);
-    if (
-      educArr.slice(1).filter((item) => !dataArr.slice(1).includes(item)).length
-    ) {
+    if (dataArr.filter((item) => !educArr.includes(item)).length) {
       return false;
     } else {
       return true;
     }
   }
 
-  return (
-    <section className="mrn-t all-bdr">
+  function handleFaceForm() {
+    setVisualEd(!visualEd);
+  }
+
+  const viewForm = (
+    <>
       <div className="e-flx jst-bw pdn-ln bg-gray">
         <h2 className="pdn-bl">Educational status</h2>
-        <button
-          className="bg-trs"
-          name="visibility"
-          onClick={() => setVisualEd(!visualEd)}
-        >
+        <button className="bg-trs" name="visibilityEd" onClick={handleFaceForm}>
           {visualEd ? <span>&#x25B2;</span> : <span>&#x25BC;</span>}
         </button>
       </div>
       {visualEd &&
-        educ.map((item, index) => (
-          <Fragment key={index + "-form"}>
+        data.education.map((item, index) => (
+          <div key={"dep" + index} className="form">
             <div className="e-flx jst-bw pdn-ln bg-lgray">
               <h3 className="pdn-bl">Training institution</h3>
-              {index > 0 ? (
-                <button
-                  mame="deleteForm"
-                  type="button"
-                  className="bg-trs"
-                  onClick={() => handleEducDelete(index)}
-                >
-                  &#x1F7AC;
-                </button>
-              ) : (
-                <button
-                  mame="addForm"
-                  type="button"
-                  className="bg-trs"
-                  onClick={handleEducAdd}
-                >
-                  more
-                </button>
-              )}
+              <button
+                mame="controlForm"
+                type="button"
+                className="bg-trs"
+                onClick={
+                  index > 0 ? () => handleDeleteLine(index) : handleAddLine
+                }
+              >
+                {index > 0 ? <span>&#x1F7AC;</span> : "more"}
+              </button>
             </div>
             <form
-              onSubmit={(e) => handleDataSave(e, index)}
-              className="e-flx aln-d dir-cl"
+              key={"educ" + index}
+              onSubmit={handleEducSave}
+              className="e-flx dir-cl"
             >
-              <label>
-                Scool name:
-                <input
-                  id={"school-" + index}
-                  name="school"
-                  placeholder="school"
-                  autoComplete="off"
-                  value={item.school}
-                  onChange={(e) => handleEducValue(e, index)}
-                  autoFocus
-                  required
-                />
-                <span></span>
-              </label>
-              <label>
-                Title of study:
-                <input
-                  id={"title-" + index}
-                  name="title"
-                  placeholder="title"
-                  autoComplete="off"
-                  value={item.title}
-                  onChange={(e) => handleEducValue(e, index)}
-                  required
-                />
-                <span></span>
-              </label>
-              <label>
-                Programming skills:
-                <input
-                  id={"skills-" + index}
-                  name="skills"
-                  placeholder="skills"
-                  autoComplete="off"
-                  value={item.skills}
-                  onChange={(e) => handleEducValue(e, index)}
-                  required
-                />
-                <span></span>
-              </label>
-              <div className="e-flx jst-ar dw-100">
-                <label className="e-flx dir-cl aln-t">
-                  Start training:
-                  <div>
-                    <input
-                      className="mrn-lt-n"
-                      type="date"
-                      id={"startStudy-" + index}
-                      name="startStudy"
-                      autoComplete="off"
-                      value={item.startStudy}
-                      onChange={(e) => handleEducValue(e, index)}
-                      required
-                    />
-                    <span></span>
-                  </div>
-                </label>
-                <label className="e-flx dir-cl aln-t">
-                  End traning:
-                  <div>
-                    <input
-                      className="mrn-lt-n"
-                      type="date"
-                      id={"endStudy-" + index}
-                      name="endStudy"
-                      autoComplete="off"
-                      value={item.endStudy}
-                      onChange={(e) => handleEducValue(e, index)}
-                    />
-                  </div>
-                </label>
+              {Object.keys(item).map(
+                (key) =>
+                  !key.match("Study") && (
+                    <div
+                      key={"ed" + key + index}
+                      className="e-flx flx-wrp mrn-bt dw-100"
+                    >
+                      <label htmlFor={key + index} className="flx-b">
+                        {key === "school"
+                          ? "Scool name:"
+                          : key === "title"
+                            ? "Title of study:"
+                            : "Programming skills:"}
+                      </label>
+                      <div className="flx-b e-flx aln-t">
+                        <input
+                          id={key + index}
+                          name={key}
+                          placeholder={
+                            key === "school"
+                              ? "Scool name:"
+                              : key === "title"
+                                ? "Title"
+                                : "Skills"
+                          }
+                          autoComplete="off"
+                          value={data.education[index][key]}
+                          onChange={(e) => handleDataValue(e, index)}
+                          autoFocus={key === "school" ? true : false}
+                          required
+                        />
+                        <span></span>
+                      </div>
+                    </div>
+                  ),
+              )}
+              <div key="educDate" className="e-flx dw-100 mrn-bt">
+                {Object.keys(item).map(
+                  (key) =>
+                    key.match("Study") && (
+                      <div
+                        key={"ed" + key + index}
+                        className={
+                          "e-flx dir-cl flx-b" +
+                          (key === "endStudy" ? " mrn-lt" : "")
+                        }
+                      >
+                        <label htmlFor={key + index} className="dw-100">
+                          {key === "startStudy"
+                            ? "Start training:"
+                            : "End traning:"}
+                        </label>
+                        <div className={"e-flx aln-t dw-100"}>
+                          <input
+                            id={key + index}
+                            name={key}
+                            type="date"
+                            autoComplete="off"
+                            value={data.education[index][key]}
+                            onChange={(e) => handleDataValue(e, index)}
+                            required={key === "startStudy" ? true : false}
+                          />
+                          <span></span>
+                        </div>
+                      </div>
+                    ),
+                )}
               </div>
               <button
                 name="confirm"
@@ -177,8 +157,46 @@ export default function Education({
                 confirm
               </button>
             </form>
-          </Fragment>
+          </div>
         ))}
+    </>
+  );
+
+  const viewSample = (
+    <>
+      <h3 className="pdn-bl">Education</h3>
+      {data.education.map((item, index) => (
+        <div key={index + "sample"} className="bdr-t pdn-bl dw-100">
+          <div className="e-flx aln-t jst-bw mrn-bt">
+            <span className="fnt-lsz txt-lt">
+              <em>
+                <strong>{item.school}</strong>
+              </em>
+            </span>
+            <span className="txt-rt">
+              Training from {item.startStudy || '" "'}
+              <br />
+              to {item.endStudy || "the present"}
+            </span>
+          </div>
+          <div className="e-flx dir-cl aln-t txt-lt">
+            <span className="mrn-bt">
+              Title of the study: <em className="fnt-lsz">{item.title}</em>
+            </span>
+            <span>
+              Main skills: <em className="fnt-lsz">{item.skills}</em>
+            </span>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+
+  return (
+    <section
+      className={preview ? "all-bdr mrn-bt" : "e-flx dir-cl pdn-ln bdr-bt"}
+    >
+      {preview ? viewForm : viewSample}
     </section>
   );
 }
