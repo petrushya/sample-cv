@@ -34,7 +34,7 @@ form {
   width: 40ch;
 }
 
-form + div {
+.form + div {
   border-top: thin solid var(--dark-gray-color);
 }
 
@@ -121,8 +121,8 @@ input:required:valid + span::before {
   justify-content: space-around;
 }
 
-.slf-c {
-  align-self: center;
+.slf-en {
+  align-self: flex-end;
 }
 
 .txt-lt {
@@ -163,17 +163,4 @@ input:required:valid + span::before {
 
 .bdr-t {
   border-top: thin solid var(--dark-gray-color);
-}
-
-table {
-  border: unset;
-  line-height: 1.125;
-  & th {
-    text-align: right;
-    font-weight: lighter;
-    padding-right: 0.25ch;
-  }
-  & td {
-    text-align: left;
-  }
 }
