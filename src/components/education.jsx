@@ -117,7 +117,7 @@ export default function Education({
                     </div>
                   ),
               )}
-              <div key="educDate" className="e-flx dw-100 mrn-bt">
+              <div key={"educDate" + index} className="e-flx dw-100 mrn-bt">
                 {Object.keys(item).map(
                   (key) =>
                     key.match("Study") && (
@@ -166,7 +166,7 @@ export default function Education({
     <>
       <h3 className="pdn-bl">Education</h3>
       {data.education.map((item, index) => (
-        <div key={index + "sample"} className="bdr-t pdn-bl dw-100">
+        <div key={index + "sampleEd"} className="bdr-t pdn-bl dw-100">
           <div className="e-flx aln-t jst-bw mrn-bt">
             <span className="fnt-lsz txt-lt">
               <em>
