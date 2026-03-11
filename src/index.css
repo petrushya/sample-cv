@@ -17,7 +17,8 @@ body {
   margin: 0;
   display: flex;
   gap: 2ch;
-  place-items: center;
+  justify-content: center;
+  align-items: flex-start;
   min-width: 50ch;
   min-height: 100vh;
 }
